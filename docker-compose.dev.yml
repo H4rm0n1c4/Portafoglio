@@ -1,0 +1,10 @@
+services:
+  portadb:
+    image: mysql:8.0
+    volumes:
+      - ./init-dev-databases.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=portapass
+    ports:
+      - "3306:3306"
