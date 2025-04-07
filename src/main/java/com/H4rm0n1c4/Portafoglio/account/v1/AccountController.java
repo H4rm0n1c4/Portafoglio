@@ -50,9 +50,9 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.OK).body(balance.toString());
     }
 
-    @PostMapping(value = "/api/v1/customer/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(value = "/api/v1/customer", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CustomerAccount> newCustomerAccount(@PathVariable("customerId") int customerId, @RequestBody CustomerAccount request) {
+    public ResponseEntity<CustomerAccount> newCustomerAccount(@RequestBody CustomerAccount request) {
         if (request.name() == null || request.name().isEmpty() || request.customerId().isEmpty()) {
             logger.error("Customer name or customer id cannot be null or empty");
             return ResponseEntity.badRequest().build();

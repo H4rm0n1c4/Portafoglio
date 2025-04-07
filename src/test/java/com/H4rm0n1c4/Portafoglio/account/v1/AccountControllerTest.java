@@ -39,7 +39,7 @@ class AccountControllerTest extends TestBase {
         Double balance = 100.0;
         CustomerAccount account = new CustomerAccount(customerId, name, balance);
         String requestJson = objectMapper.writeValueAsString(account);
-        MvcResult result = mockMvc.perform(post("/api/v1/customer/{customerId}", "24680")
+        MvcResult result = mockMvc.perform(post("/api/v1/customer", "24680")
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
                 .content(requestJson)).andExpect(status().isOk()).andReturn();
         String responseBody = result.getResponse().getContentAsString();
@@ -61,13 +61,13 @@ class AccountControllerTest extends TestBase {
         Double balance = 100.0;
         CustomerAccount emptycIdAccount = new CustomerAccount(emptyCustomerId, name, balance);
         String requestJson1 = objectMapper.writeValueAsString(emptycIdAccount);
-        mockMvc.perform(post("/api/v1/customer/{customerId}", "24680")
+        mockMvc.perform(post("/api/v1/customer", "24680")
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
                 .content(requestJson1)).andExpect(status().isBadRequest()).andReturn();
 
         CustomerAccount emptyNameAccount = new CustomerAccount(customerId, emptyName, balance);
         String requestJson2 = objectMapper.writeValueAsString(emptyNameAccount);
-        mockMvc.perform(post("/api/v1/customer/{customerId}", "24680")
+        mockMvc.perform(post("/api/v1/customer", "24680")
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
                 .content(requestJson2)).andExpect(status().isBadRequest()).andReturn();
     }
@@ -80,7 +80,7 @@ class AccountControllerTest extends TestBase {
         Double balance = 100.0;
         CustomerAccount account = new CustomerAccount(customerId, name, balance);
         String requestJson = objectMapper.writeValueAsString(account);
-        mockMvc.perform(post("/api/v1/customer/{customerId}", "24680")
+        mockMvc.perform(post("/api/v1/customer", "24680")
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
                 .content(requestJson)).andExpect(status().isConflict()).andReturn();
     }

@@ -45,10 +45,10 @@ Wallet service to track customers account balance
 * To test account creation (so you can after that test transactions) run app with:
   * `gradle bootrun`
 * Then in new terminal window:
-  * `curl -X POST -k https://localhost:8443/api/v1/customer/12345 -H 'Content-Type: application/json' -d '{"customerId": "12346", "name":"Bob", "balance": 50.1}'`
+  * `curl -X POST -k https://localhost:8443/api/v1/customer -H 'Content-Type: application/json' -d '{"customerId": "12346", "name":"Bob", "balance": 50.0}'`
 * This will create a new account for customer named Bob that has balance of 50.1 readily available (of course you can try and create other accounts too, but keep in mind that customerId's are unique)
 * After this you may try the transactions API:
-  * `curl -X POST -k https://localhost:8443/api/v1/transaction/WIN -H 'Content-Type: application/json' -d '{"eventId":3,"customerId" :"12346", "amount":"130.0"  }'`
+  * `curl -X POST -k https://localhost:8443/api/v1/transaction/WIN -H 'Content-Type: application/json' -d '{"eventId":3,"customerId" :"12346", "amount":"130.0"}'`
   * `curl -X POST -k https://localhost:8443/api/v1/transaction/PURCHASE -H 'Content-Type: application/json' -d '{"eventId":4,"customerId" :"12346", "amount":"130.0"}'`
 * These API's will send a WIN and PURCHASE events to the wallet service which in turn will record the changed balance to the
   corresponding account and responds the new balance to the caller.
